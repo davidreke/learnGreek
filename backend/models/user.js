@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {isEmail} = require('validator')
 
 const Schema = mongoose.Schema;
 
@@ -26,21 +27,20 @@ const wordSchema = new Schema({
 });
 
 const userSchema = new Schema({
-    "eMail":{
-        "type": String,
-        "required":true,
-        "unique": true,
-        "trim": true,
-        "minlength": 3
-    },
-    "password":{
-        "type": String,
-        "required": true,
-        "trim": true,
-        "minlength": 8
-    },
-    "words": [wordSchema]
-        
+  eMail: {
+    type: String,
+    required: [true, "Please Enter an e-mail"],
+    trim: true,
+    minlength: 3,
+    validate: [isEmail, "please enter a valid-email"],
+  },
+  password: {
+    type: String,
+    required: [true, "Please Enter a password"],
+    trim: true,
+    minlength: [8, '"Minminum password length is 8 characters'],
+  },
+  words: [wordSchema],
 });
 
 const User = mongoose.model("user", userSchema);
