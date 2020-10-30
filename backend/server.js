@@ -21,10 +21,12 @@ connection.once("open", () => {
 });
 
 const userRouter = require('./routes/userRouter');
-// const wordRouter = require('./routes/wordRouter');
+const wordRouter = require('./routes/wordRouter');
 
 app.use('/user', userRouter);
-// app.use('/word', wordRouter);
+app.use('/words', wordRouter);
+
+
 
 app.listen(port, () =>{
     console.log(`server is running on port ${port}`);

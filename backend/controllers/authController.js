@@ -1,5 +1,5 @@
 const User = require ('../models/user')
-
+const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
 
@@ -69,13 +69,14 @@ module.exports.signup_post = async (req, res) => {
 };
 
 module.exports.login_post = async (req, res) => {
+  console.log(req.body)
   // shows us the data that was sent.
   // console.log(req.body)
   // destructure to just get the email and password from the body
-  const { email, password } = req.body;
-
+  const { eMail, password } = req.body;
+    console.log('login called')
   try {
-    const user = await User.login(email, password);
+    const user = await User.login(eMail, password);
 
     // creates and sends a jwt cookie
     const token = createToken(user._id);
@@ -87,8 +88,8 @@ module.exports.login_post = async (req, res) => {
     res.status(400).json({ errors });
   }
 
-  // console.log(email, password)
-  // res.send('user login')
+  console.log(eMail, password)
+  res.send('user login')
 };
 
 // logout route
