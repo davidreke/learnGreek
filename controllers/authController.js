@@ -1,6 +1,7 @@
 const User = require ('../models/user')
 const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 // ***handle errors***
@@ -36,7 +37,7 @@ const maxAge = 7 * 24 * 60 *60
 // create and send token
 const createToken = (id) => {
     // make sure to change secret before deployment
-    return jwt.sign({id}, 'secret placeholder',{expiresIn: maxAge})
+    return jwt.sign({id}, process.env.SECRET,{expiresIn: maxAge})
 }
 
 module.exports.signup_post = async (req, res) => {

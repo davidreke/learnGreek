@@ -46,16 +46,21 @@ router.post("/add/:id",(req, res) =>{
 });
 
 router.put("/update/:id", (req, res) =>{
-    User.findById(req.params.id)
-        .then((user) => {
-            wordToUpdate = user.words.filter(word => word.english == req.body.english )
-            console.log(req.body)
-            wordToUpdate.success = req.body.success;
-            wordToUpdate.timeStamp = req.body.timeStamp
-            console.log(wordToUpdate)
-            res.status(200).json(wordToUpdate)
-        })
+    User.findOneAndUpdate({
+        _id: req.params.id,
+        _id: req.body.id},{
+            $set: {
+                "words.$.success": req.body.success,
+                "word.&.timeStamp": Date.now()
+            }
+        }).then(
+            User.findById(req.params.id)
+            .then(user => {
+                res.status(200).json(user)
+            })
+        )
         .catch((err) => {res.status(400).json("Error: "+err)})
+      
 })
 
 

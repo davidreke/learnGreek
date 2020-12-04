@@ -1,0 +1,22 @@
+.bg-charcoal {
+  background-color: #122620;
+}
+
+#frontpage {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.front-panel {
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  border-left: 10px solid #D6AD60;
+  padding: 20px;
+  margin-top: 3vw;
+}
+
+.front-panel h3 {
+  font-size: 20px;
+}

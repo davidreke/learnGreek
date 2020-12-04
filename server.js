@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors")
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 require("dotenv").config();
 
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('../client/build'));
 
-const uri = process.env.ATLAS_URI || "mongodb+srv://user:test123@learngreek.uvuo7.mongodb.net/learnGreek?retryWrites=true&w=majority"
+const uri = process.env.ATLAS_URI
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 const connection = mongoose.connection;
