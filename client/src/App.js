@@ -1,10 +1,10 @@
-import Navbar from './components/navbar'
+import NavigationBar from './components/navbar'
 import Homepage from './components/HomePage'
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <NavigationBar />
      <div className="container">
        <Homepage />
      </div>

@@ -1,24 +1,50 @@
-import React from 'react'
+import React, {Component} from 'react';
+import RegisterModal from './authModals/RegisterModal'
+import LoginModal from './authModals/loginModal'
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    Nav,
+    NavItem,
+    Container
+} from 'reactstrap'
 
-export default function navbar() {
-    return (
+export default class NavigationBar extends Component {
+
+    state = {
+        isOpen: true
+    }
+
+    componentDidMount(){
+        if(document.documentElement.clientWidth < 767){
+            this.setState({
+                isOpen: false
+            })
+        }
+    }
+
+    render () {
+        return (
         
-        <nav className="navbar navbar-expand leg navbar-dark bg-charcoal">
-            <div className="container">
-                <a href="/" className="navbar-brand">Mimnéskó</a>
+        <Navbar  className="navbar navbar-expand leg navbar-dark bg-charcoal">
+            <Container>
+                <NavbarBrand href="/" className="navbar-brand">Mimnéskó</NavbarBrand >
 
-            <div className="collapse navbar-collapse">
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item active">
-                        <a href="" className="nav-link">Login</a>
-                    </li>
-                    <li className="nav-item active">
-                        <a href="" className="nav-link">Register</a>
-                    </li>
-                </ul>
-            </div>
-            </div>
-        </nav>
+            <Collapse isOpen={this.state.isOpen}>
+                <Nav className="ml-auto">
+                    <NavItem>
+                        <RegisterModal />
+                    </NavItem>
+                    <NavItem className="nav-item active">
+                        <LoginModal />
+                    </NavItem>
+                </Nav>
+            </ Collapse>
+            </Container>
+        </Navbar>
         
     )
+    }
 }
